@@ -38,65 +38,47 @@ const marco = {
   const shippingCost = 50
   let utenteCheEffettuaLAcquisto = amy //cambia il valore qui per provare se il tuo algoritmo //
 
- let arrayvuoto = [];
- arrayvuoto.push(marco, paul, amy);
+let utenti = [];
+utenti.push(marco, paul, amy);
 
- let utenti = [marco, paul, amy];
+let prezzo = 0;
+let prezzoFinale = 0;
+
+for(let i = 0; i<prices.length; i++){
+  prezzo += prices[i]
+}
+
+if(utenteCheEffettuaLAcquisto.isAmbassador){
+  prezzoFinale = prezzo - prezzo * 0.7;
+}else{
+  prezzoFinale = prezzo;
+}
+
+if(prezzoFinale >100){
+  console.log("Devi pagare" + prezzoFinale)
+}else if(prezzoFinale < 100){
+  prezzoFinale = prezzoFinale + shippingCost;
+  console.log("Devi pagare"+ prezzoFinale + (100 - (prezzoFinale - shippingCost)) + "euro per avere spedizione gratis"
+  )
+}
 
 
-utenti.forEach((utente) => {
-  let costoTotale = prices.reduce((acc, prezzo) => acc + prezzo, 0); 
-  if (utente.isAmbassador) {
-    costoTotale *= 0.7; 
+for(let i= 0; i < utenti.length; i++ ){
+  if(utenti[i].isAmbassador){
+    console.log(utenti[i].name + "" + utenti[i].lastName + "e´ un Ambassador")
+  }else{
+    console.log(utenti[i].name + ""+ utenti[i].lastName + "non e´ un Ambassador")
   }
-  if (costoTotale <= 100) {
-    costoTotale += shippingCost; 
-  }
-  utente.totaleCarrello = costoTotale; 
-});
+}
 
-utenti.forEach((utente) => {
-  console.log(
-    `${utente.name} ${utente.lastName} ${
-      utente.isAmbassador ? "è" : "non è"
-    } un ambassador. Il costo totale del carrello è ${utente.totaleCarrello}.`
-  );
-});
+let ambassadors = [];
+for(i = 0; i < utenti.length; i++){
+if(utenti[i].isAmbassador){
+  ambassadors.push(utenti[i]);
+}
+}
+
+console.log(ambassadors)
 
 
-const ambassadorArray = utenti.filter((utente) => utente.isAmbassador);
-
-console.log("Gli utenti ambassador sono/e:");
-ambassadorArray.forEach((ambassador) => {
-  console.log(`${ambassador.name} ${ambassador.lastName}`);
-});
  
-
-// for(i = 0; i< utenti.length; i++){
- //   if (utenti[i].isAmbassador) {
-   //   if(utenti[i].totaleCarta >= freeShipping) {   
-  //      utenti[i].totaleCarta * 0,7;
-    //  }else{
-    //    utenti[i].totaleCarta= (utenti[i].totaleCarta + shippingCost) * 0,7; 
-   //   }
-   // }else{
-   //     if(utenti[i].totaleCarta < freeShipping){    
-   //   }else{
-   //      utenti[i].totaleCarta +=  shippingCost  ; 
-   //   }     
-   // }
-    
-//}
-
-//for(i = 0; i< utenti.length; i++){
-  //  let question = utenti[i].isAmbassador? "E` ambassador" : "No ambassador";
-
-//console.log(`${utenti[i].name} ${utenti[i].lastName} ${utenti[i].isAmbassador}`)
-//console.log(`il costo totale ${utenti[i].name} ${utenti[i].lastName} e ${utenti[i].totaleCarta}`)
-//}
-//console.log("Utenti Ambassador");//
-
-
-    
-
-
