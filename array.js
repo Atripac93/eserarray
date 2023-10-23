@@ -36,13 +36,41 @@ const marco = {
   
   const prices = [34, 5, 2]
   const shippingCost = 50
-  let utenteCheEffettuaLAcquisto = amy //cambia il valore qui per provare se il tuo algoritmo funziona!
+  let utenteCheEffettuaLAcquisto = amy //cambia il valore qui per provare se il tuo algoritmo //
 
- let utenti = [];
- utenti.push("Marco","Paul","Amy");
- console.log(utenti);
+ let arrayvuoto = [];
+ arrayvuoto.push(marco, paul, amy);
 
- let 
+ let utenti = [marco, paul, amy];
+
+
+utenti.forEach((utente) => {
+  let costoTotale = prices.reduce((acc, prezzo) => acc + prezzo, 0); 
+  if (utente.isAmbassador) {
+    costoTotale *= 0.7; 
+  }
+  if (costoTotale <= 100) {
+    costoTotale += shippingCost; 
+  }
+  utente.totaleCarrello = costoTotale; 
+});
+
+utenti.forEach((utente) => {
+  console.log(
+    `${utente.name} ${utente.lastName} ${
+      utente.isAmbassador ? "è" : "non è"
+    } un ambassador. Il costo totale del carrello è ${utente.totaleCarrello}.`
+  );
+});
+
+
+const ambassadorArray = utenti.filter((utente) => utente.isAmbassador);
+
+console.log("Gli utenti ambassador sono/e:");
+ambassadorArray.forEach((ambassador) => {
+  console.log(`${ambassador.name} ${ambassador.lastName}`);
+});
+ 
 
 // for(i = 0; i< utenti.length; i++){
  //   if (utenti[i].isAmbassador) {
@@ -68,31 +96,6 @@ const marco = {
 //}
 //console.log("Utenti Ambassador");//
 
-const ambassadorUsers = users.filter((user) => user.isAmbassador);
-
-for (let user of users) {
-  let discount = user.isAmbassador ? 0.7 : 1;
-  let cartTotal = prices.reduce((acc, price) => acc + price, 0) * discount;
-
-  if (cartTotal <= 100) {
-    user.totaleCarta = cartTotal + shippingCost;
-  } else {
-    user.totaleCarta = cartTotal;
-  }
-
-  console.log(
-    `${user.name} ${user.lastName} ${
-      user.isAmbassador ? "è un ambassador" : "non è un ambassador"
-    }`
-  );
-
-  console.log(`Il costo totale del carrello di ${user.name} ${user.lastName} è ${user.totaleCarta}`);
-}
-
-console.log("Utenti Ambassador:");
-for (let user of ambassadorUsers) {
-  console.log(`${user.name} ${user.lastName} è un ambassador`);
-}
 
     
 
